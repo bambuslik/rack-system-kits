@@ -1,6 +1,5 @@
 <template lang="pug">
-ul.pathway(v-if="pathway.length")
-    li.pathway__item(v-for="(pathwayItem, key) in pathway" :key="key") {{ pathwayItem.title }}
+h1.page-title {{ pageTitle }}
 </template>
 
 <script>
@@ -9,7 +8,7 @@ export default {
     components: {
 
     },
-    props: ['pathway'],
+    props: ['pageTitle'],
     setup() {
 
         return {
@@ -21,31 +20,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .pathway {
-        list-style: none;
+    .page-title {
+        font-family: 'SF Pro Display';
+        font-weight: 600;
+        font-size: 36px;
+        line-height: 1.3;
         margin: 0;
-        padding: 0;
-        display: flex;
-        flex-wrap: wrap;
-        font-family: 'SF UI Text', Arial, sans-serif;
-        line-height: 1;
-
-        &__item {
-            color: #828282;
-
-            &:after {
-                content: '/';
-                display: inline-block;
-                margin: 0 14px;
-            }
-
-            &:last-child {
-                color: $color-main;
-
-                &:after {
-                    display: none;
-                }
-            }
-        }
+        padding-top: 32px;
     }
 </style>

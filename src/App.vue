@@ -1,9 +1,10 @@
 <template lang="pug">
-.products-list-page
-    header.products-list-page__header.page-wrapper
+.page.products-list-page
+    header.products-list-page__header.page__wrapper
         app-pathway(:pathway="pathway")
-    aside.products-list-page__filters.page-wrapper
-    main.products-list-page__items.page-wrapper
+        app-page-title(:pageTitle="pageTitle")
+    aside.products-list-page__filters.page__wrapper
+    main.products-list-page__items.page__wrapper
 
 
 
@@ -18,7 +19,9 @@
 export default {
     name: 'App',
     components: {
-        AppPathway
+        AppPathway,
+        AppPageTitle
+
     },
     setup() {
         //получаем pathway из роутера
@@ -37,9 +40,12 @@ export default {
             }
         ]
 
-        return {
-            pathway
+        //получаем h1 страницы из роутера
+        const pageTitle = 'Комплекты стеллажных систем'
 
+        return {
+            pathway,
+            pageTitle
         }
     }
 
