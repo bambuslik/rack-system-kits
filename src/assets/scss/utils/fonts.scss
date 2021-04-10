@@ -1,0 +1,59 @@
+@font-face {
+    font-family: 'Aeroport';
+    src: local('Aeroport Medium'), local('Aeroport-Medium'),
+    url('~@/assets/fonts/Aeroport/Aeroport-Medium.woff2'),
+    url('~@/assets/fonts/Aeroport/Aeroport-Medium.woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: local('SF Pro Display Regular'), local('SFProDisplay-Regular'),
+    url('~@/assets/fonts/SF-Pro-Display/SFProDisplay-Regular.woff2'),
+    url('~@/assets/fonts/SF-Pro-Display/SFProDisplay-Regular.woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: local('SF Pro Display Medium'), local('SFProDisplay-Medium'),
+    url('~@/assets/fonts/SF-Pro-Display/SFProDisplay-Medium.woff2'),
+    url('~@/assets/fonts/SF-Pro-Display/SFProDisplay-Medium.woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: local('SF Pro Display Semibold'), local('SFProDisplay-Semibold'),
+    url('~@/assets/fonts/SF-Pro-Display/SFProDisplay-Semibold.woff2'),
+    url('~@/assets/fonts/SF-Pro-Display/SFProDisplay-Semibold.woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SF UI Text';
+    src: local('SF UI Display Regular'), local('SFUIDisplay-Regular'),
+    url('~@/assets/fonts/SF-UI-Text/SFUIText-Regular.woff2'),
+    url('~@/assets/fonts/SF-UI-Text/SFUIText-Regular.woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SF UI Text';
+    src: local('SF UI Text Medium'), local('SFUIText-Medium'),
+    url('~@/assets/fonts/SF-UI-Text/SFUIText-Medium.woff2'),
+    url('~@/assets/fonts/SF-UI-Text/SFUIText-Medium.woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
