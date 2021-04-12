@@ -1,6 +1,16 @@
 <template lang="pug">
 .product
-    img.product__img(:src="require(`@/data${product.image.url}`)" :title="product.name" :alt="product.name")
+    img.product__img.product__img_loading(
+        :src="require(`@/assets/img/product/product-img-fallback.svg`)"
+        v-show="!imgLoadState"
+    )
+    img.product__img(
+        :src="require(`@/data${product.image.url}`)"
+        @load="imgLoadState = true"
+        v-show="imgLoadState"
+        :title="product.name"
+        :alt="product.name"
+    )
     span.product__sku {{ product.code }}
     h2.product__title {{ product.name }}
     .product__row.product__row_price
@@ -15,6 +25,8 @@
 </template>
 
 <script>
+import { ref } from "vue";
+
 export default {
     name: 'ProductsItem',
     components: {
@@ -24,8 +36,10 @@ export default {
         product: Object
     },
     setup() {
-        return {
+        const imgLoadState = ref(false)
 
+        return {
+            imgLoadState
         }
     }
 }
@@ -46,6 +60,10 @@ export default {
             max-width: 100%;
             flex-shrink: 0;
             align-self: center;
+
+            &_loading {
+
+            }
         }
 
         &__sku {

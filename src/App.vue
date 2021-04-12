@@ -15,7 +15,10 @@
             v-model="filterState"
         )
     main.products-list-page__items.page__wrapper
-        products(:products="sortedAndFilteredProducts")
+        products(
+            :products="sortedAndFilteredProducts"
+            :loading="productsIsLoading"
+        )
 </template>
 
 <script>
@@ -120,6 +123,7 @@ export default {
             filterState,
             sortingOptions,
             sortingState,
+            productsIsLoading,
             sortedAndFilteredProducts
         }
     }

@@ -1,7 +1,10 @@
 <template lang="pug">
-ul.products-list
-    li.products-list__item(v-for="product in products" :key="product.id")
-        products-item(:product="product")
+template(v-if="loading")
+    .products-list-loading
+template(v-else)
+    ul.products-list
+        li.products-list__item(v-for="product in products" :key="product.id")
+            products-item(:product="product")
 </template>
 
 <script>
@@ -13,7 +16,8 @@ export default {
         ProductsItem
     },
     props: {
-        products: Array
+        products: Array,
+        loading: Boolean
     },
     setup() {
 
@@ -25,13 +29,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .products-list-loading {
+        height: 100px;
+        background: url('~@/assets/img/loading-ico.svg') no-repeat center;
+    }
     .products-list {
         list-style: none;
         margin: 0;
         padding: 0;
-        /*display: flex;*/
-        /*column-gap: 48px;*/
-        /*flex-wrap: wrap;*/
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-column-gap: 48px;
@@ -54,13 +59,8 @@ export default {
         }
 
         &__item {
-            /*width: calc(25% - (48px * 3 / 4));*/
             box-sizing: border-box;
             display: flex;
-
-            @media (max-width: 1200px) {
-                /*width: calc(33.33% - (48px * 2 / 3));*/
-            }
         }
     }
 </style>
