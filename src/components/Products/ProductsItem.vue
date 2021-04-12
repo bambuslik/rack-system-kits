@@ -20,18 +20,14 @@ export default {
     components: {
 
     },
-    props: ['product'],
+    props: {
+        product: Object
+    },
     setup() {
-
-        console.log(
-
-        );
-
         return {
 
         }
     }
-
 }
 </script>
 
@@ -43,10 +39,9 @@ export default {
         flex-grow: 1;
         display: flex;
         flex-direction: column;
-        font-family: 'SF UI Text';
+        font-family: 'SF UI Text', sans-serif;
 
         &__img {
-            /*border: 1px solid #7b7b7b;*/
             box-sizing: border-box;
             max-width: 100%;
             flex-shrink: 0;
@@ -130,20 +125,13 @@ export default {
             top: 8px;
             left: 0;
             background: #EB5757;
-            font-family: 'SF Pro Display';
+            font-family: 'SF Pro Display', sans-serif;
             color: #FFF;
             font-size: 14px;
             line-height: 1.3;
             font-weight: 500;
             letter-spacing: 1px;
             padding: 3px 16px;
-
         }
-
-
-
     }
-
-
-
 </style>

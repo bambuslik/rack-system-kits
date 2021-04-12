@@ -11,17 +11,16 @@ export default {
     name: 'Products',
     components: {
         ProductsItem
-
-
     },
-    props: ['products'],
+    props: {
+        products: Array
+    },
     setup() {
 
         return {
 
         }
     }
-
 }
 </script>
 
@@ -37,6 +36,22 @@ export default {
         grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-column-gap: 48px;
         grid-row-gap: 40px;
+
+        @media (max-width: 1200px) {
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-column-gap: 24px;
+            grid-row-gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr 1fr;
+            grid-column-gap: 20px;
+        }
+
+        @media (max-width: 540px) {
+            grid-template-columns: 1fr;
+            grid-column-gap: 0;
+        }
 
         &__item {
             /*width: calc(25% - (48px * 3 / 4));*/

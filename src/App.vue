@@ -2,12 +2,12 @@
 .page.products-list-page
     header.products-list-page__header.page__wrapper
         app-pathway(:pathway="pathway")
-        app-page-title(:pageTitle="pageTitle")
+        page-title(:pageTitle="pageTitle")
     aside.products-list-page__filters.page__wrapper
         app-select(
             label="Сортировать по:"
             :options="sortingOptions"
-            v-model.number="sortingState"
+            v-model="sortingState"
         )
         app-select(
             label="Материал"
@@ -21,9 +21,8 @@
 <script>
 import { ref, computed } from "vue";
 
-//import components
 import AppPathway from '@/components/AppPathway/index.vue'
-import AppPageTitle from '@/components/AppPageTitle/index.vue'
+import PageTitle from '@/components/PageTitle/index.vue'
 import Products from "@/components/Products/index";
 import AppSelect from "@/components/AppSelect/index";
 
@@ -38,8 +37,7 @@ export default {
         AppSelect,
         Products,
         AppPathway,
-        AppPageTitle
-
+        PageTitle
     },
     setup() {
         const setDelay = (ms) => {
@@ -73,7 +71,7 @@ export default {
         const productsIsLoading = ref(false)
         const products = ref([])
         const materials = ref([])
-        const filterState = ref()
+        const filterState = ref(null)
         const sortingOptions = ref([
             {
                 "id": "1",
@@ -84,7 +82,7 @@ export default {
                 "name": "Цена по убыванию"
             }
         ])
-        const sortingState = ref()
+        const sortingState = ref(null)
 
         const getProducts = async () => {
             productsIsLoading.value = true
@@ -96,8 +94,6 @@ export default {
             sortingState.value = Number(sortingOptions.value[0].id)
             productsIsLoading.value = false
         }
-
-        getProducts()
 
         const sortedAndFilteredProducts = computed(() => {
             const filteredProducts = products.value.filter((el) => {
@@ -115,6 +111,8 @@ export default {
             }
         })
 
+        getProducts()
+
         return {
             pathway,
             pageTitle,
@@ -129,7 +127,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" scoped >
     .products-list-page {
 
         &__wrapper {
@@ -137,8 +135,21 @@ export default {
         }
 
         &__filters {
+            margin-top: 32px;
             display: flex;
+
+            @media (max-width: $viewport-tablet) {
+                margin-top: 18px;
+                flex-direction: column;
+            }
         }
 
+        &__items {
+            margin-top: 23px;
+
+            @media (max-width: $viewport-tablet) {
+                margin-top: 16px;
+            }
+        }
     }
 </style>

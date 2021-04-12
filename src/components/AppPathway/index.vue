@@ -9,7 +9,9 @@ export default {
     components: {
 
     },
-    props: ['pathway'],
+    props: {
+        pathway: Array
+    },
     setup() {
 
         return {
@@ -27,8 +29,12 @@ export default {
         padding: 0;
         display: flex;
         flex-wrap: wrap;
-        font-family: 'SF UI Text', Arial, sans-serif;
-        line-height: 1;
+        font-family: 'SF UI Text', sans-serif;
+        line-height: 1.4;
+
+        @media (max-width: $viewport-tablet) {
+            font-size: 14px;
+        }
 
         &__item {
             color: #828282;
@@ -37,6 +43,10 @@ export default {
                 content: '/';
                 display: inline-block;
                 margin: 0 14px;
+
+                @media (max-width: $viewport-tablet) {
+                    margin: 0 10px;
+                }
             }
 
             &:last-child {

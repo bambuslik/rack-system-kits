@@ -4,11 +4,13 @@ h1.page-title {{ pageTitle }}
 
 <script>
 export default {
-    name: 'AppPathway',
+    name: 'Pathway',
     components: {
 
     },
-    props: ['pageTitle'],
+    props: {
+        pageTitle: String
+    },
     setup() {
 
         return {
@@ -21,11 +23,15 @@ export default {
 
 <style lang="scss" scoped>
     .page-title {
-        font-family: 'SF Pro Display';
         font-weight: 600;
         font-size: 36px;
         line-height: 1.3;
         margin: 0;
         padding-top: 32px;
+
+        @media (max-width: $viewport-tablet) {
+            font-size: 24px;
+            padding-top: 18px;
+        }
     }
 </style>
