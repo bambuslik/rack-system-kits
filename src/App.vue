@@ -4,36 +4,45 @@
         app-pathway(:pathway="pathway")
         app-page-title(:pageTitle="pageTitle")
     aside.products-list-page__filters.page__wrapper
+        app-select(
+            label="Сортировать по:"
+            :options="sortingOptions"
+            v-model.number="sortingState"
+        )
+        app-select(
+            label="Материал"
+            :options="materials"
+            v-model="filterState"
+        )
     main.products-list-page__items.page__wrapper
-        products(:productsList="products")
-
-
-
-
+        products(:products="sortedAndFilteredProducts")
 </template>
 
 <script>
-//import hooks
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
 //import components
 import AppPathway from '@/components/AppPathway/index.vue'
 import AppPageTitle from '@/components/AppPageTitle/index.vue'
-import Products from "./components/Products/index";
+import Products from "@/components/Products/index";
+import AppSelect from "@/components/AppSelect/index";
 
 //import data
 import productsJSON from '@/data/json/items.json'
+import materialsJSON from '@/data/json/materials.json'
+
 
 export default {
     name: 'App',
     components: {
+        AppSelect,
         Products,
         AppPathway,
         AppPageTitle
 
     },
     setup() {
-        const delay = (ms) => {
+        const setDelay = (ms) => {
             return new Promise(resolve => {
                 setTimeout(() => {
                     resolve()
@@ -41,7 +50,7 @@ export default {
             })
         }
 
-        //получаем pathway из роутера
+        //получаем pathway
         const pathway = [
             {
                 title: 'Главная',
@@ -57,26 +66,63 @@ export default {
             }
         ]
 
-        //получаем h1 страницы из роутера
+        //получаем заголовок страницы
         const pageTitle = 'Комплекты стеллажных систем'
 
-        //получаем товары
-        const productsIsLoading = ref(true)
+        //товары
+        const productsIsLoading = ref(false)
         const products = ref([])
-        // const mainTableColumns = ref([])
+        const materials = ref([])
+        const filterState = ref()
+        const sortingOptions = ref([
+            {
+                "id": "1",
+                "name": "Цена по возрастанию"
+            },
+            {
+                "id": "2",
+                "name": "Цена по убыванию"
+            }
+        ])
+        const sortingState = ref()
+
         const getProducts = async () => {
-            //имитация получения данных с бэка
-            await delay(0)
+            productsIsLoading.value = true
+            //имитация задержки получения данных с бэка
+            await setDelay(0)
             products.value = productsJSON
+            materials.value = materialsJSON
+            filterState.value = Number(materials.value[0].id)
+            sortingState.value = Number(sortingOptions.value[0].id)
             productsIsLoading.value = false
         }
 
         getProducts()
 
+        const sortedAndFilteredProducts = computed(() => {
+            const filteredProducts = products.value.filter((el) => {
+                    return el.material === filterState.value
+                })
+
+            if(sortingState.value === 1) {
+                return filteredProducts.sort((a, b) => {
+                    return a.price.current_price - b.price.current_price
+                })
+            } else {
+                return filteredProducts.sort((a, b) => {
+                    return b.price.current_price - a.price.current_price
+                })
+            }
+        })
+
         return {
             pathway,
             pageTitle,
-            products
+            materials,
+            filterState,
+            sortingOptions,
+            sortingState,
+            sortedAndFilteredProducts
         }
     }
 
@@ -85,10 +131,14 @@ export default {
 
 <style lang="scss" scoped>
     .products-list-page {
+
         &__wrapper {
 
         }
+
+        &__filters {
+            display: flex;
+        }
+
     }
-
-
 </style>

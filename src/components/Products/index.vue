@@ -1,6 +1,6 @@
 <template lang="pug">
 ul.products-list
-    li.products-list__item(v-for="product in productsList" :key="product.id")
+    li.products-list__item(v-for="product in products" :key="product.id")
         products-item(:product="product")
 </template>
 
@@ -14,7 +14,7 @@ export default {
 
 
     },
-    props: ['productsList'],
+    props: ['products'],
     setup() {
 
         return {
