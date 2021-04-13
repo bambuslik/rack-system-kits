@@ -19,7 +19,6 @@
     .product__buttons
         button.product__btn.product__btn_cart(@click="addToStorage('cart')" :class="{'product__btn_cart-active': iconActive.cart}")
         button.product__btn.product__btn_like(@click="addToStorage('like')" :class="{'product__btn_like-active': iconActive.like}")
-        //button.product__btn.product__btn_like.product__btn_like-active()
     span.product__sale(v-if="product.price.old_price") Скидка
 </template>
 
