@@ -17,15 +17,14 @@
         span.product__price.product__price_old(v-if="product.price.old_price") {{ Math.round(product.price.old_price) }}₽
         span.product__price.product__price_current {{ Math.round(product.price.current_price) }}₽
     .product__buttons
-        button.product__btn.product__btn_cart()
-        //button.product__btn.product__btn_cart.product__btn_cart-active()
-        button.product__btn.product__btn_like()
+        button.product__btn.product__btn_cart(@click="addToStorage('cart')" :class="{'product__btn_cart-active': iconActive.cart}")
+        button.product__btn.product__btn_like(@click="addToStorage('like')" :class="{'product__btn_like-active': iconActive.like}")
         //button.product__btn.product__btn_like.product__btn_like-active()
     span.product__sale(v-if="product.price.old_price") Скидка
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 
 export default {
     name: 'ProductsItem',
@@ -35,11 +34,48 @@ export default {
     props: {
         product: Object
     },
-    setup() {
+    setup(props) {
         const imgLoadState = ref(false)
 
+        const iconActive = reactive({
+            'cart': false,
+            'like': false
+        })
+
+        const isInStorage = (storageType) => {
+            let storage = localStorage.getItem(storageType);
+            storage = storage ? storage.split(',') : []
+            return storage.indexOf(props.product.id) !== -1;
+        }
+
+        const addToStorage = (storageType) => {
+            if(isInStorage(storageType)) {
+                //remove from storage
+                let storage = localStorage.getItem(storageType);
+                storage = storage.split(',')
+                let index = storage.indexOf(props.product.id);
+                if(index > -1) {
+                    storage.splice(index, 1);
+                }
+                localStorage.setItem(storageType, storage.toString())
+                iconActive[storageType] = false
+            } else {
+                //add to storage
+                let storage = localStorage.getItem(storageType);
+                storage = storage ? storage.split(',') : []
+                storage.push(props.product.id)
+                localStorage.setItem(storageType, storage.toString())
+                iconActive[storageType] = true
+            }
+        }
+
+        iconActive.cart = isInStorage('cart')
+        iconActive.like = isInStorage('like')
+
         return {
-            imgLoadState
+            imgLoadState,
+            iconActive,
+            addToStorage,
         }
     }
 }
